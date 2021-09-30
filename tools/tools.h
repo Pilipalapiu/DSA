@@ -2,6 +2,7 @@
 #define _TOOLS_H_
 
 #include<stdio.h>
+#include<stdlib.h>
 
 //print everything in a vector
 void show(int *A, int len){

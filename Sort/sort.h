@@ -1,10 +1,7 @@
 #ifndef _SORT_H_
 #define _SORT_H_
 
-#include"../tools/tools.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include"../test/DSA.h"
 
 
 //插入排序算法
@@ -130,5 +127,11 @@ void mergeSort(int *A, int len){
 //quick
 void quickSort(int *A, int len){
 
+}
+
+//heapSort
+void heapSort(int *A, int len){
+    PQ* B = Array2Heap(A,len);
+    
 }
 #endif // _SORT_H_

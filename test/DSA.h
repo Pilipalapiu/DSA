@@ -3,5 +3,6 @@
 
 #include"../BT/ALL_BT.h"
 #include"../Stack/ALL_STACK.h"
+#include"../Heap/PQ_ComplHeap.h"
 
 #endif //_DSA_H_
