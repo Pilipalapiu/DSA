@@ -4,6 +4,7 @@
 
 #include "../tools/tools.h"
 
+//完全二叉堆
 typedef struct PQ {
     int LastIndex;
     int data[MAXSIZE];
@@ -119,6 +120,8 @@ int down(PQ* PQ, int index){
                 swap(&(PQ->data[index]), &(PQ->data[tmp]));
                 index = tmp;
             }
+            else
+                break;
         }
         else
             break;
@@ -126,8 +129,8 @@ int down(PQ* PQ, int index){
 }
 
 int del_PQmax(PQ* PQ){
-    int tmp = PQ->data[(PQ->LastIndex)--];
-    swap(&(PQ->data[0]),&(PQ->data[PQ->LastIndex]));
+    int tmp = PQ->data[0];
+    swap(&(PQ->data[0]),&(PQ->data[PQ->LastIndex--]));
     down(PQ, 0);
     return tmp;
 }
@@ -137,8 +140,8 @@ void insert_PQ(PQ* PQ,int x){
     up(PQ,PQ->LastIndex);
 }
 
-//BF建堆
-void BF_Heapify(PQ** H){
+//BF建堆：自上而下的上滤
+void BF_Heapify(PQ* H){
 
     int buf;
 
@@ -146,30 +149,34 @@ void BF_Heapify(PQ** H){
     scanf("%d",&buf);
     while (buf!=991220)
     {
-        insert_PQ(*H,buf);
+        insert_PQ(H,buf);
         printf("\nEnter the value:\n");
         scanf("%d",&buf);
     }
 }
-//Floyd建堆
-void Floyd_Heapify(PQ** H){
+//Floyd建堆：自下而上的下滤
+void Floyd_Heapify(PQ* H){
 
-    int buf=0;
+    int buf=4;
 
     printf("\nEnter the value:\n");
     scanf("%d",&buf);
     while (buf!=991220)
     {
-        (*H)->data[++(*H)->LastIndex] = buf;
+        H->data[++H->LastIndex] = buf--;
         printf("\nEnter the value:\n");
         scanf("%d",&buf);
     }
 
-    for (int i = (*H)->LastIndex; i > -1; i--)
+    for (int i = H->LastIndex; i > -1; i--)
     {
-        down(*H,i);
+        down(H,i);
     }
     
 }
-
+void showHeap(PQ* H){
+    printf("\n\n");
+    show(H->data,H->LastIndex+1);
+    printf("\n\n");
+}
 #endif  // _PQ_COMPLHEAP_

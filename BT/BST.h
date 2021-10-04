@@ -16,7 +16,7 @@ BinNode* BST_search(BinTree T,int key){
 }
 
 //Insert a node into BST
-int BST_insert(BinTree* T, int key){
+int BST_insert(BinTree *T, int key){
     if (*T==NULL)
     {
         *T = (BinTree)malloc(sizeof(BinNode));
