@@ -28,7 +28,7 @@ void SwapPtr(LeftHeap* a, LeftHeap* b){
 void PreRecHeapTraversal(LeftHeap LH){
     if (LH!=NULL)
     {
-        printf(" %d%d ",LH->data,LH->npl);
+        printf(" %d ",LH->data);
         PreRecHeapTraversal(LH->lc);
         PreRecHeapTraversal(LH->rc);
     }  
@@ -49,8 +49,7 @@ LeftHeap HeapMerge(HeapNode* a, HeapNode* b){
     if(!b) return a;
     if (a->data < b->data)
         SwapPtr(&a,&b);
-    a->rc = HeapMerge(a->rc,b);
-    //a->rc->parent = a;  
+    a->rc = HeapMerge(a->rc,b); 
     if (!a->lc || a->lc->npl < a->rc->npl)
         SwapPtr(&(a->lc),&(a->rc));
     a->npl = a->rc ? (a->rc->npl + 1) : 1;
@@ -93,7 +92,7 @@ LeftHeap LeftHeapCreate(){
     }
     return LH;
 
-    
+
 }
 
 #endif // _PQ_LEFTHEAP_H_
