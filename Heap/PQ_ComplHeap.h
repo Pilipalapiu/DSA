@@ -3,7 +3,6 @@
 #define MAXSIZE 128
 
 #include "../tools/tools.h"
-
 //完全二叉堆
 typedef struct PQ {
     int LastIndex;
@@ -158,6 +157,7 @@ void BF_Heapify(PQ* H){
 void Floyd_Heapify(PQ* H){
 
     int buf=4;
+    int i;
 
     printf("\nEnter the value:\n");
     scanf("%d",&buf);
@@ -168,7 +168,7 @@ void Floyd_Heapify(PQ* H){
         scanf("%d",&buf);
     }
 
-    for (int i = H->LastIndex; i > -1; i--)
+    for (i = H->LastIndex; i > -1; i--)
     {
         down(H,i);
     }

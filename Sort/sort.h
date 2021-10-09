@@ -9,7 +9,7 @@ void insertionSort (int *A, int len) {
     int i,j;//循环变量
     int tmp;//缓存区
 
-    for (int i = 1; i < len; i++)//外层循环，遍历无序序列的每一个元素
+    for (i = 1; i < len; i++)//外层循环，遍历无序序列的每一个元素
     {
         tmp=A[i];
         j=i-1;
@@ -71,7 +71,7 @@ void selectionSort(int *A, int len){
     for (i = 0; i < len; i++)//遍历所有元素
     {
         min=A[i];
-        for (int j = i+1; j < len; j++)//在i之后寻找更小的元素
+        for (j = i+1; j < len; j++)//在i之后寻找更小的元素
         {
             if (min>A[j])//若发现，则替换二者位置
             {
@@ -125,13 +125,46 @@ void mergeSort(int *A, int len){
 }
 
 //quick
-void quickSort(int *A, int len){
 
+//首先构造一个轴点分割算法
+int partition(int *A, int lo,int hi){
+    int pivotValue = A[lo];
+    while (lo<hi)
+    {
+        while ( lo<hi )
+        {
+            if(A[hi]>pivotValue) 
+                hi--;
+            else
+            {
+                A[lo++]=A[hi];
+                break;
+            }
+        }
+        while(lo<hi){
+            if(A[lo]<pivotValue)
+                lo++;
+            else{
+                A[hi--]=A[lo];
+                break;
+            }
+        }
+    }
+    
+    A[lo] = pivotValue;
+    return lo;
+}
+int* quick(int* A, int lo, int hi){
+    if(lo == hi)
+        return A;
+    if(lo<hi){
+        int pivot = partition(A,lo,hi);
+        quick(A,lo,pivot-1);
+        quick(A,pivot+1,hi); 
+    }
 }
 
-//heapSort
-void heapSort(int *A, int len){
-    PQ* B = Array2Heap(A,len);
-    
+void quickSort(int *A, int len){
+    quick(A,0,len-1);
 }
 #endif // _SORT_H_

@@ -8,7 +8,6 @@ typedef struct HeapNode{
 
     struct HeapNode *lc;
     struct HeapNode *rc;
-    //struct HeapNode *parent;
     int data;
     int npl;//Null Path Length
 
@@ -22,7 +21,7 @@ void SwapPtr(LeftHeap* a, LeftHeap* b){
     tmp = *a;
     *a = *b;
     *b = tmp;
-    
+
 }
 
 void PreRecHeapTraversal(LeftHeap LH){
@@ -34,25 +33,16 @@ void PreRecHeapTraversal(LeftHeap LH){
     }  
 }
 
-void InRecHeapTraversal(LeftHeap LH){
-    if (LH!=NULL)
-    {
-        InRecHeapTraversal(LH->lc);
-        printf(" %d ",LH->data);
-        InRecHeapTraversal(LH->rc);
-    }
-}
-
 LeftHeap HeapMerge(HeapNode* a, HeapNode* b){
 
     if(!a) return b;
     if(!b) return a;
     if (a->data < b->data)
         SwapPtr(&a,&b);
-    a->rc = HeapMerge(a->rc,b); 
+    a->rc = HeapMerge(a->rc,b);  
     if (!a->lc || a->lc->npl < a->rc->npl)
         SwapPtr(&(a->lc),&(a->rc));
-    a->npl = a->rc ? (a->rc->npl + 1) : 1;
+    a->npl = a->rc ? a->rc->npl + 1 : 1;
     return a; 
 }
 
@@ -62,19 +52,22 @@ LeftHeap NewHeapNode(int key){
     LH = (LeftHeap)malloc(sizeof(HeapNode));
     LH->data = key;
     LH->npl = 1;
-
     return LH;
 }
 
 void LeftHeapInsert(LeftHeap* LH, int key ){
 
-    LeftHeap a = NULL;
-    LeftHeap b = NULL;
+    LeftHeap a;
+    LeftHeap b;
     b = NewHeapNode(key);
     a = *LH;
     b->data = key;
     *LH =  HeapMerge(a,b);
 
+}
+
+LeftHeapDel(LeftHeap* LH){
+    
 }
 
 LeftHeap LeftHeapCreate(){
@@ -91,8 +84,7 @@ LeftHeap LeftHeapCreate(){
         scanf("%d",&buf);
     }
     return LH;
-
-
+    
 }
 
 #endif // _PQ_LEFTHEAP_H_

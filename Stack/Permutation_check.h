@@ -5,10 +5,11 @@
 
 int permutation_check(int A[10], int Stack[10], int top){
 
+    int i;
     int Check[10];
     int ck_top = -1;
 
-    for (int i = 0; i < 10; i++)
+    for (i = 0; i < 10; i++)
     {
         while(ck_top==-1 || Check[ck_top]!=A[i])
             if(top!=-1) 
